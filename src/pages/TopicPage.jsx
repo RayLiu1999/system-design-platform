@@ -1,10 +1,11 @@
-// 主題頁面骨架 — 四段式佈局（概念講解 + 實戰場景 + 模擬器 + 面試問答）
+// 主題頁面骨架 — 四段式佈局（概念講解 + 模擬器 + 實戰場景 + 面試問答）
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Suspense, lazy } from 'react'
 import { getTopicById, getAdjacentTopics } from '../data/topics'
 import topicContent from '../data/topicContent'
 import InterviewQA from '../components/InterviewQA'
+import FormattedContent from '../components/FormattedContent'
 import './TopicPage.css'
 
 // 動態載入主題模擬器（按需載入以提升效能）
@@ -37,7 +38,7 @@ const simulatorModules = {
 
 /**
  * 主題頁面 — 四段式結構
- * 概念講解 → 實戰場景 → 互動模擬器 → 面試問答
+ * 概念講解 → 互動模擬器 → 實戰場景 → 面試問答
  */
 export default function TopicPage() {
   const { topicId } = useParams()
@@ -107,7 +108,7 @@ export default function TopicPage() {
             {content.concepts.map((c, i) => (
               <div key={i} className="concept-block">
                 <h3 className="concept-block-title">{c.title}</h3>
-                <p className="concept-block-text">{c.text}</p>
+                <FormattedContent text={c.text} />
               </div>
             ))}
           </div>
@@ -118,23 +119,7 @@ export default function TopicPage() {
         )}
       </section>
 
-      {/* 第二段：實戰場景（含產品設計題） */}
-      {content?.scenarios && content.scenarios.length > 0 && (
-        <section className="content-section scenarios-section" id="scenarios-section">
-          <h2>🎯 實戰場景</h2>
-          <div className="scenarios-content">
-            {content.scenarios.map((s, i) => (
-              <div key={i} className="scenario-block">
-                <div className="scenario-label">{s.type === 'design' ? '🏗️ 產品設計' : '🔥 生產實戰'}</div>
-                <h3 className="scenario-block-title">{s.title}</h3>
-                <p className="scenario-block-text">{s.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 第三段：互動模擬器 */}
+      {/* 第二段：互動模擬器 */}
       <section className="content-section" id="simulator-section">
         <h2>🧪 {t('sections.simulator')}</h2>
         {SimulatorComponent ? (
@@ -149,6 +134,22 @@ export default function TopicPage() {
           </div>
         )}
       </section>
+
+      {/* 第三段：實戰場景（含產品設計題） */}
+      {content?.scenarios && content.scenarios.length > 0 && (
+        <section className="content-section scenarios-section" id="scenarios-section">
+          <h2>🎯 實戰場景</h2>
+          <div className="scenarios-content">
+            {content.scenarios.map((s, i) => (
+              <div key={i} className="scenario-block">
+                <div className="scenario-label">{s.type === 'design' ? '🏗️ 產品設計' : '🔥 生產實戰'}</div>
+                <h3 className="scenario-block-title">{s.title}</h3>
+                <FormattedContent text={s.text} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 第四段：面試問答 */}
       <section className="content-section" id="interview-section">
