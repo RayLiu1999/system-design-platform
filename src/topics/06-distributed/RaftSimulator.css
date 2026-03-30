@@ -1,0 +1,167 @@
+/* Raft 共識算法模擬器樣式 */
+
+.raft-sim .raft-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-distributed);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 叢集狀態列 */
+.raft-cluster-status {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.raft-cluster-status .danger {
+  color: var(--clr-error);
+}
+
+/* 節點網格 */
+.raft-nodes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.raft-node {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--clr-bg-secondary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+}
+
+.raft-node.leader {
+  border-color: var(--clr-warning);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.15);
+}
+
+.raft-node.candidate {
+  border-color: var(--clr-info);
+}
+
+.raft-node.crashed {
+  border-color: var(--clr-error);
+  opacity: 0.5;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.raft-node.electing {
+  animation: raft-elect 0.6s ease-in-out infinite;
+}
+
+@keyframes raft-elect {
+  0%, 100% { border-color: var(--clr-info); }
+  50% { border-color: var(--clr-warning); box-shadow: 0 0 12px rgba(96, 165, 250, 0.3); }
+}
+
+.raft-node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.raft-node-id {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+}
+
+.raft-node-badge {
+  font-size: var(--text-xs);
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--clr-bg-tertiary);
+  color: var(--clr-text-muted);
+}
+
+.raft-node-badge.leader { color: var(--clr-warning); background: rgba(251, 191, 36, 0.1); }
+.raft-node-badge.candidate { color: var(--clr-info); background: rgba(96, 165, 250, 0.1); }
+.raft-node-badge.crashed { color: var(--clr-error); background: rgba(239, 68, 68, 0.1); }
+
+.raft-node-term {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  font-family: var(--font-mono);
+}
+
+.raft-node-log {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+.raft-log-preview {
+  display: block;
+  font-size: 10px;
+  color: var(--clr-text-muted);
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.raft-node-actions {
+  margin-top: auto;
+}
+
+.btn-sm {
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-bg-tertiary);
+  color: var(--clr-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-sm:hover {
+  background: var(--clr-bg-primary);
+  border-color: var(--clr-text-muted);
+}
+
+.btn-sm.revive {
+  border-color: var(--clr-success);
+  color: var(--clr-success);
+}
+
+/* 控制區 */
+.raft-controls {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .raft-nodes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .raft-controls {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .raft-nodes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

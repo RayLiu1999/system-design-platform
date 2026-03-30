@@ -1,0 +1,99 @@
+/* 訊息佇列模擬器樣式 */
+
+.mq-sim .mq-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-message-queue);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 流程視覺化 */
+.mq-flow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding: var(--space-5) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.mq-flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-secondary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+}
+
+.mq-flow-node.queue-box {
+  min-width: 180px;
+}
+
+.mq-flow-arrow {
+  font-size: var(--text-xl);
+  color: var(--clr-text-muted);
+  padding-top: var(--space-8);
+}
+
+/* 佇列訊息視覺化 */
+.mq-queue-items {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.mq-queue-item {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  background: rgba(96, 165, 250, 0.15);
+  color: var(--clr-info);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.mq-queue-item.retry {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--clr-warning);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.mq-queue-more {
+  font-size: 10px;
+  color: var(--clr-text-muted);
+}
+
+/* 控制區 */
+.mq-controls {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .mq-flow {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mq-flow-arrow {
+    transform: rotate(90deg);
+    padding-top: 0;
+  }
+  .mq-controls {
+    flex-direction: column;
+  }
+}

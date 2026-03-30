@@ -10,8 +10,11 @@ import './TopicPage.css'
 const simulatorModules = {
   'load-balancing': lazy(() => import('../topics/02-api-network/LoadBalancingSimulator.jsx')),
   'cap-theorem': lazy(() => import('../topics/01-fundamentals/CAPSimulator.jsx')),
+  'scalability': lazy(() => import('../topics/01-fundamentals/ConsistencySimulator.jsx')),
   'cache-problems': lazy(() => import('../topics/04-cache/CacheProblemsSimulator.jsx')),
   'rate-limiting': lazy(() => import('../topics/07-security/RateLimitingSimulator.jsx')),
+  'consensus': lazy(() => import('../topics/06-distributed/RaftSimulator.jsx')),
+  'message-queue': lazy(() => import('../topics/05-message-queue/MessageQueueSimulator.jsx')),
 }
 
 /**
