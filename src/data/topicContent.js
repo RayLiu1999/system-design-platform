@@ -164,26 +164,26 @@ const topicContent = {
   },
   'event-driven': {
     concepts: [
-      { title: '事件驅動架構（EDA）', text: '服務透過發布/訂閱事件通訊，而非直接呼叫。優點：松耦合、易擴展、易添加新功能（只需訂閱事件）。挑戰：事件順序、最終一致性、事件溯源的複雜性。適合微服務架構和需要高度解耦的系統。' },
-      { title: 'Event Sourcing', text: '不存儲當前狀態，而是存儲所有狀態變更事件。當前狀態透過重放（Replay）事件序列得到。優點：完整的審計軌跡、可回溯到任意時間點、天然支援事件驅動。缺點：查詢複雜（需搭配 CQRS）、事件 schema 演進困難。' },
-      { title: 'CQRS（命令查詢分離）', text: '將寫入（Command）和讀取（Query）分成不同的資料模型和服務。寫入端使用正規化模型保證一致性，讀取端使用反正規化的 View Model 優化查詢效能。搭配 Event Sourcing 時，事件寫入 Event Store，讀取端透過 Projection 建立查詢視圖。' },
+      { title: 'Saga 的補償操作設計', text: '電商下單 Saga：CreateOrder → ReserveStock → ChargePayment → ConfirmOrder。如果 ChargePayment 失敗，需要反向補償：ReleaseStock → CancelOrder。設計要點：(1) 補償操作必須冪等（可能被多次觸發）；(2) 某些操作不可補償（如已發出的 Email），需設計為 Saga 最後一步（Pivot Transaction）；(3) 補償操作可能也會失敗 → 需要 Retry + DLQ + 人工介入 + 對帳機制兜底。Saga 不保證隔離性（其他事務可能看到 Saga 的中間狀態），需要業務層面處理（如「訂單處理中」狀態對用戶可見）。' },
+      { title: 'Event Schema 演進是最難的部分', text: 'Event Sourcing 半年後新增了一個欄位，舊事件沒有這個欄位怎麼辦？策略：(1) Weak Schema — Consumer 容忍缺失欄位（用 Optional / Default Value），最簡單；(2) Upcaster — 讀取舊版本事件時自動升級到新版本（event_v1 → event_v2 轉換函數）；(3) Versioned Event — 事件帶版本號，Consumer 按版本分發處理。絕對不要直接修改已存在事件的 Schema —— Event Store 是 Append Only 的，已寫入的事件是歷史事實不可更改。Avro + Schema Registry 可以自動處理 Schema 兼容性檢查。' },
+      { title: 'Choreography vs Orchestration 決策', text: 'Choreography（編舞）：各服務監聽事件自行反應。優點：完全去中心化，加新服務只需訂閱事件。缺點：流程分散在各服務中，Debug 困難（「為什麼訂單狀態卡住了？要看 5 個服務的日誌」）。Orchestration（編排）：中央 Orchestrator（如 Temporal、Cadence）控制流程。優點：流程清晰可視、失敗重試好管理。缺點：Orchestrator 成為中心點。實務建議：3 個服務以內用 Choreography，超過 3 個用 Orchestration。Uber 從 Choreography 遷移到 Orchestration（Cadence）就是因為流程太複雜時 Choreography 不可維護。' },
     ],
     interview: [
-      { question: 'Event Sourcing 的優缺點？', answer: '優點：(1) 完整審計紀錄；(2) 可重建任意歷史狀態；(3) 天然支援 Event-Driven；(4) 寫入效能好（Append Only）。缺點：(1) 查詢需要 Projection 額外建立讀模型；(2) Event Schema 演進困難（需版本控制）；(3) 資料量大時 Replay 慢；(4) 開發複雜度高。', keywords: ['Event Store', 'Replay', 'Projection', 'Append Only'] },
-      { question: 'Saga Pattern 如何處理分散式事務？', answer: 'Saga 將長事務拆成一系列本地事務，每個事務有對應的補償操作。兩種實現：(1) Choreography（編舞）：各服務透過事件自行協調；(2) Orchestration（編排）：中央協調者控制流程。失敗時按逆序執行補償操作。Orchestration 更易理解和維護。', keywords: ['Saga', 'Choreography', 'Orchestration', '補償事務'] },
-      { question: 'Pub/Sub 和 Message Queue 的差異？', answer: 'MQ（點對點）：訊息只被一個 Consumer 消費，用於任務分發。Pub/Sub（發布訂閱）：訊息被所有 Subscriber 收到，用於事件廣播。Kafka 兼具兩者：同一 Consumer Group 內點對點，不同 Group 間廣播。選擇取決於訊息語義：命令用 MQ，事件用 Pub/Sub。', keywords: ['Point-to-Point', 'Publish-Subscribe', 'Consumer Group'] },
+      { question: '電商系統中「扣庫存 → 建訂單 → 扣款」失敗了，如何設計補償流程？', answer: 'Saga Orchestration 方案：Orchestrator 控制每一步，Step 3（扣款）失敗時依序執行補償：(1) 退還庫存（ReserveStock 的補償 = ReleaseStock）；(2) 取消訂單（CreateOrder 的補償 = CancelOrder）。關鍵設計：每個步驟記錄到 Saga Log（哪些步驟成功了，方便知道要補償哪些）。補償操作的冪等保證：ReleaseStock 用 (order_id + saga_id) 做唯一鍵，重複呼叫不會多退庫存。超時處理：步驟超時等同失敗觸發補償。監控：Saga 執行時間超過閾值告警。', keywords: ['Saga 補償', 'Orchestrator', 'Saga Log', '冪等補償'] },
+      { question: 'Saga 和 2PC 的核心差別？什麼時候用哪個？', answer: 'Saga：每步都是本地事務 + 異步補償，無全局鎖，效能好但無隔離性（中間狀態可見）。2PC：全局鎖保證 Atomicity + Isolation，但有阻塞問題且效能差。選擇依據：(1) 跨服務微服務 → Saga（2PC 的鎖跨服務不現實）；(2) 單 DB 多表 → 用 DB 原生 Transaction 即可（不需要 Saga 也不需要 2PC）；(3) 強一致性且延遲可接受 → 考慮 TCC（Try-Confirm-Cancel），本質是「預留資源 → 確認/取消」，比 2PC 靈活。Saga 是微服務架構下分散式事務的主流選擇。', keywords: ['Saga vs 2PC', 'TCC', '隔離性', '微服務事務'] },
+      { question: '使用 Event Sourcing 的系統如何做資料查詢？', answer: '直接查 Event Store 效能極差（需要 Replay 所有事件算出當前狀態）。標準做法是 CQRS + Projection：(1) 建立 Read Model — Consumer 訂閱事件流，將事件轉換為查詢友好的 View（如 Elasticsearch 做全文搜索、PostgreSQL 做關聯查詢）；(2) 多個 Read Model 服務不同查詢場景 — 訂單列表用 ES，統計報表用 ClickHouse，即時 Dashboard 用 Redis；(3) Projection 延遲 — 事件發布到 View 更新之間有延遲（毫秒到秒級），讀取端需接受最終一致性；(4) Projection Rebuild — 新增查詢需求時可以從 Event Store Replay 建立新的 View。', keywords: ['CQRS Projection', 'Read Model', '最終一致性', 'Replay'] },
     ],
   },
   'async-processing': {
     concepts: [
-      { title: '非同步處理模式', text: '將耗時操作從請求-回應鏈路中剝離，透過 Message Queue 或 Task Queue 異步執行。常見場景：發送通知郵件、影像處理、報表生成、第三方 API 呼叫。回應時回傳 202 Accepted + 任務 ID，客戶端輪詢或 WebSocket 取得結果。' },
-      { title: 'Worker Pool 模式', text: '多個 Worker 從佇列中競爭消費任務，實現水平擴展。關鍵設計：任務超時控制、失敗重試（指數退避）、Dead Letter Queue（DLQ）處理多次失敗的任務、任務優先順序、並發限制。Celery（Python）、Sidekiq（Ruby）、Bull（Node）是常見實現。' },
-      { title: '冪等性設計', text: '由於 at-least-once delivery 可能導致重複消費，每個任務處理需要冪等。實現方式：(1) 資料庫唯一約束；(2) 用 Redis 記錄已處理的 Message ID；(3) 業務操作設計為天然冪等（如 SET 而非 INCREMENT）；(4) Deduplication Token。' },
+      { title: '非同步 API 的完整生命週期', text: '用戶上傳影片要轉碼，不可能同步等待。完整流程：(1) 客戶端 POST /upload → 200 + { task_id, status: "queued" }；(2) 任務進入 MQ → Worker 消費開始轉碼 → 更新 task 狀態為 processing；(3) 客戶端輪詢 GET /tasks/{id} 查進度，或用 WebSocket/SSE 推送進度條；(4) 完成後狀態更新為 completed，客戶端取得下載 URL。常踩的坑：(1) 客戶端提交後離開頁面 → 需要持久化任務狀態不依賴 Session；(2) Worker 處理到一半掛了 → 需要 Visibility Timeout 機制（SQS）或 ACK 超時回重新投遞。' },
+      { title: 'Backpressure（背壓）', text: '場景：Producer 產生速度 > Consumer 消費速度，佇列無限增長最終 OOM。解法層次：(1) 佇列端 — 設定 Max Length（RabbitMQ x-max-length），超出時拒絕新訊息或丟棄最舊的。(2) Producer 端 — Rate Limiting，Producer 感知佇列長度後自動降速（如 Kafka Producer 的 buffer.memory 滿時阻塞）。(3) 架構層 — 實作 Reactive Streams 的 Backpressure 協議，Subscriber 向 Publisher 請求 N 條（Pull 模式）。Kafka 天然是 Pull 模式（Consumer 主動 poll），比 Push 模式（RabbitMQ）更不容易被壓垮。' },
+      { title: '任務優先順序與公平排程', text: '場景：付費用戶的影片要比免費用戶優先轉碼。方案：(1) 多佇列策略 — high/medium/low 三個佇列，Worker 按 6:3:1 比例消費。簡單且有效但粒度粗。(2) Priority Queue — RabbitMQ 原生支援（x-max-priority），但 Kafka 不支援。(3) Weighted Fair Queue — 每個租戶分配權重，Worker 按權重輪詢各租戶的佇列（Sidecar 模式）。避免某個大客戶的百萬任務餓死其他小客戶。SQS 的做法是不支援優先順序，而是建議用多個佇列 + Lambda 按需消費。' },
     ],
     interview: [
-      { question: '什麼場景適合非同步處理？', answer: '(1) 耗時超過用戶可接受延遲（如影像轉碼）；(2) 不影響核心流程的附帶操作（如發通知）；(3) 存在流量突峰需要削峰填谷；(4) 涉及第三方服務呼叫（不確定延遲）。核心原則：如果操作的結果不需要立即回傳給用戶，就適合異步。', keywords: ['削峰填谷', '解耦', 'Best Effort', '202 Accepted'] },
-      { question: '如何設計任務重試機制？', answer: '(1) 指數退避：1s → 2s → 4s → 8s...避免衝擊下游；(2) 最大重試次數（通常 3-5 次）；(3) 超過次數進 Dead Letter Queue 人工處理；(4) 區分可重試錯誤（網路超時）和不可重試錯誤（參數錯誤）；(5) 每次重試帶上 Retry-Count Header 用於追蹤。', keywords: ['Exponential Backoff', 'DLQ', 'Retry Strategy'] },
-      { question: 'Dead Letter Queue（DLQ）的作用？', answer: 'DLQ 存放多次處理失敗的訊息，防止失敗訊息無限重試阻塞正常訊息。DLQ 中的訊息需要人工介入或自動化腳本處理。設計要點：保留原始訊息內容和失敗原因、設定告警、定期巡檢、提供重新投遞機制。', keywords: ['DLQ', 'Poison Message', '告警', '重投遞'] },
+      { question: '你的非同步任務處理系統出現大量「已完成」狀態但用戶未收到結果通知的情況。為什麼？', answer: '排查：任務本身完成了，但通知環節失敗。常見原因：(1) Callback URL 失效 — 客戶端提供的 Webhook URL 已下線或超時。解法：加 Retry + Exponential Backoff，最終寫入 Failed Callback 表。(2) 通知和任務完成不在同一事務中 — 任務完成 → 更新 DB 成功 → 發通知失敗 → DB 標記已完成但通知沒發。解法：Outbox Pattern 或讓通知成為 Saga 的一部分。(3) 訊息丟失 — 通知放入 MQ 但 Consumer 已經停了。解法：監控通知佇列的 Consumer Lag。長期方案：客戶端應同時支持「推」（Webhook）和「拉」（輪詢 API）兩種模式。', keywords: ['Webhook Retry', 'Outbox 通知', 'Consumer Lag', '推拉結合'] },
+      { question: '如何設計一個支援百萬級並發的影片轉碼系統？', answer: '架構分層：(1) 上傳 — 大檔案用分片上傳（Multipart Upload）到 S3，避免應用伺服器瓶頸；(2) 佇列 — SQS 或 Kafka 做任務佇列，按檔案大小自動路由到不同優先級佇列（< 100MB 快速佇列，> 1GB 大檔佇列）；(3) Worker — Kubernetes Job / AWS Lambda 按需擴縮容。GPU Worker 用 Spot Instance 降低成本（中斷後 Job 自動重新調度）；(4) 輸出 — 轉碼後上傳 S3 + CloudFront 分發。效能關鍵：每個 Worker 只處理一個 Segment（將影片按 GOP 切割成數十個 Segment 並行轉碼，最後 Concat），Netflix 使用此方法將 4K 影片轉碼從小時級降到分鐘級。', keywords: ['分片上傳', 'Spot Instance', 'GOP 並行', 'Auto Scaling'] },
+      { question: '任務重試了 5 次都失敗進了 DLQ，但 DLQ 裡有 10 萬條訊息沒人處理。怎麼辦？', answer: '這是 DLQ 營運債務問題。解法：(1) 分類 — 寫 Script 解析 DLQ 訊息的失敗原因，分為「可修復」和「不可修復」兩類。不可修復（如參數缺失）直接歸檔 + 通知業務方。可修復（如下游服務曾經掛了）批量重投遞。(2) 自動化 — 建立 DLQ Consumer 自動分析失敗原因，符合特定 Pattern 的自動重投遞（如 HTTP 500 → 延遲 1 小時重試）。(3) 告警 — DLQ 深度 > 100 觸發 PagerDuty 告警，不要等到 10 萬條才發現。(4) 預防 — 回顧為什麼 5 次重試都失敗 — 是否是不可重試錯誤被重試了？改進重試策略區分 Retryable 和 Non-Retryable Error。', keywords: ['DLQ 營運', '自動分類', '失敗 Pattern', '告警機制'] },
     ],
   },
   'consensus': {
