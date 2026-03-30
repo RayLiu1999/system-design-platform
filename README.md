@@ -1,16 +1,80 @@
-# React + Vite
+# Senior System Design Learning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive platform built for senior backend engineers to master system design patterns, real-world architectural scenarios, and high-level interview preparation.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Features
 
-## React Compiler
+- **Modular Architecture**: Highly organized data structure under `src/data/topics/`, making it easy to add or update technical modules.
+- **Senior-Level Perspective**: Deep dives into complex topics beyond basic terminology:
+  - **Messaging**: Exactly-once semantics, Outbox Pattern with CDC, and high-concurrency consumer lag handling strategies (e.g., temporary Topic re-balancing).
+  - **Distributed Systems**: Raft safety guarantees (Leader Completeness), ZooKeeper lease mechanisms, and Snowflake ID clock skew solutions.
+  - **Security**: OIDC/OAuth2 deep dive (PKCE), IDOR/SSRF practical defense scenarios, and adaptive rate limiting for DDoS protection.
+  - **Observability**: High-cardinality monitoring problems, Little's Law for scientific capacity planning, and zero-downtime database migration strategies.
+- **Interactive Simulators**: Built-in visual simulators for Load Balancing, Cache Problems (Penetration/Breakdown), Message Queues, and more.
+- **Interview-Ready**: Curated Q&A pairs focused on senior backend design challenges and architectural trade-offs.
+- **Premium UI/UX**: Clean, responsive, and professional technical documentation feel, optimized for deep reading.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **State Management**: React Context / Hooks
+- **Localization**: [i18next](https://www.i18next.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+---
+
+## Project Structure
+
+```text
+src/
+├── components/       # Reusable UI components & Interactive Simulators
+├── data/
+│   ├── topics/       # Modularized technical content (JS/ESM)
+│   │   ├── mq.js
+│   │   ├── security.js
+│   │   ├── observability.js
+│   │   └── index.js  # Main entry for topics
+├── hooks/            # Custom React hooks for simulators
+└── pages/            # Main application layouts and routing
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or pnpm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/RayLiu1999/system_design_note_web.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+[繁體中文版本 (Traditional Chinese)](README.zh-TW.md)
