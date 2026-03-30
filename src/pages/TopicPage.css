@@ -44,25 +44,6 @@
   margin-bottom: var(--space-4);
 }
 
-/* 進度檢查點 */
-.topic-checkpoints {
-  display: flex;
-  gap: var(--space-5);
-  flex-wrap: wrap;
-}
-
-.checkpoint {
-  font-size: var(--text-sm);
-  color: var(--clr-text-muted);
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.checkpoint.done {
-  color: var(--clr-success);
-}
-
 /* 佔位區塊 */
 .simulator-placeholder,
 .concept-placeholder {
@@ -110,11 +91,6 @@
   min-height: 50vh;
 }
 
-/* 標記按鈕 */
-.mark-qa-btn {
-  margin-top: var(--space-4);
-}
-
 /* 概念內容區塊 */
 .concept-content {
   display: flex;
@@ -142,13 +118,48 @@
   line-height: 1.8;
 }
 
+/* 實戰場景區塊 */
+.scenarios-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.scenario-block {
+  padding: var(--space-4) var(--space-5);
+  background: var(--clr-bg-secondary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--clr-warning, #f59e0b);
+  position: relative;
+}
+
+.scenario-label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--clr-warning, #f59e0b);
+  margin-bottom: var(--space-2);
+}
+
+.scenario-block-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.scenario-block-text {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  line-height: 1.8;
+}
+
 /* 響應式 */
 @media (max-width: 768px) {
   .topic-title {
     font-size: var(--text-2xl);
-  }
-
-  .topic-checkpoints {
-    gap: var(--space-3);
   }
 }

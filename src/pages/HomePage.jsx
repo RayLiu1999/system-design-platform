@@ -1,6 +1,5 @@
 // 首頁 — 學習地圖
 import { useTranslation } from 'react-i18next'
-import { useOutletContext } from 'react-router-dom'
 import { CATEGORIES } from '../data/topics'
 import TopicCard from '../components/TopicCard'
 import './HomePage.css'
@@ -11,7 +10,6 @@ import './HomePage.css'
  */
 export default function HomePage() {
   const { t } = useTranslation()
-  const { getTopicProgress, totalProgress } = useOutletContext()
 
   return (
     <div className="home-page page-enter-active" id="home-page">
@@ -19,19 +17,6 @@ export default function HomePage() {
       <div className="home-header">
         <h1 className="home-title">{t('app.title')}</h1>
         <p className="home-subtitle">{t('app.subtitle')}</p>
-
-        {/* 總進度摘要 */}
-        <div className="home-progress-summary">
-          <div className="home-progress-bar">
-            <div
-              className="home-progress-bar-fill"
-              style={{ width: `${totalProgress.percentage}%` }}
-            />
-          </div>
-          <span className="home-progress-text">
-            {t('app.progress')}：{totalProgress.percentage}%（{totalProgress.completedTopics}/24 主題完成）
-          </span>
-        </div>
       </div>
 
       {/* 學習地圖 */}
@@ -51,7 +36,6 @@ export default function HomePage() {
                   key={topic.id}
                   topic={topic}
                   categoryColor={cat.color}
-                  progress={getTopicProgress(topic.id)}
                 />
               ))}
             </div>

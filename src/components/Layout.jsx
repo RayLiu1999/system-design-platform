@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { useTheme } from '../hooks/useTheme'
-import { useProgress } from '../hooks/useProgress'
 import './Layout.css'
 
 /**
@@ -13,7 +12,6 @@ import './Layout.css'
  */
 export default function Layout() {
   const { theme, toggleTheme } = useTheme()
-  const { totalProgress, getTopicProgress, markComplete } = useProgress()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -21,19 +19,16 @@ export default function Layout() {
       <Navbar
         theme={theme}
         onToggleTheme={toggleTheme}
-        totalProgress={totalProgress}
         onToggleSidebar={() => setSidebarOpen(prev => !prev)}
       />
 
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        getTopicProgress={getTopicProgress}
       />
 
       <main className="main-content" id="main-content">
-        {/* Outlet 渲染子路由頁面，傳遞共用的 context */}
-        <Outlet context={{ getTopicProgress, markComplete, totalProgress }} />
+        <Outlet />
       </main>
     </div>
   )

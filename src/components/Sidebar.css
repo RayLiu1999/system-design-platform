@@ -78,25 +78,7 @@
   white-space: nowrap;
 }
 
-/* 進度狀態圖示 */
-.status-icon {
-  font-size: var(--text-xs);
-  flex-shrink: 0;
-  width: 16px;
-  text-align: center;
-}
 
-.status-icon.completed {
-  color: var(--clr-success);
-}
-
-.status-icon.in-progress {
-  color: var(--clr-warning);
-}
-
-.status-icon.not-started {
-  color: var(--clr-text-muted);
-}
 
 /* 手機版遮罩 */
 .sidebar-overlay {

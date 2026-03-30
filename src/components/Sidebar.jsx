@@ -7,7 +7,7 @@ import './Sidebar.css'
 /**
  * 側邊欄 — 依分類列出所有主題，當前主題高亮
  */
-export default function Sidebar({ isOpen, onClose, getTopicProgress }) {
+export default function Sidebar({ isOpen, onClose }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
@@ -20,17 +20,6 @@ export default function Sidebar({ isOpen, onClose, getTopicProgress }) {
   const handleTopicClick = (topicId) => {
     navigate(`/topic/${topicId}`)
     onClose() // 手機版點擊後關閉側邊欄
-  }
-
-  // 進度狀態圖示
-  const StatusIcon = ({ status }) => {
-    if (status === 'completed') {
-      return <span className="status-icon completed">✓</span>
-    }
-    if (status === 'in-progress') {
-      return <span className="status-icon in-progress">◐</span>
-    }
-    return <span className="status-icon not-started">○</span>
   }
 
   return (
@@ -51,7 +40,6 @@ export default function Sidebar({ isOpen, onClose, getTopicProgress }) {
               {/* 主題列表 */}
               <ul className="sidebar-topics">
                 {cat.topics.map(topic => {
-                  const progress = getTopicProgress(topic.id)
                   const isActive = currentTopicId === topic.id
                   return (
                     <li key={topic.id}>
@@ -60,7 +48,6 @@ export default function Sidebar({ isOpen, onClose, getTopicProgress }) {
                         onClick={() => handleTopicClick(topic.id)}
                         id={`sidebar-topic-${topic.id}`}
                       >
-                        <StatusIcon status={progress.status} />
                         <span className="sidebar-topic-name">{t(topic.titleKey)}</span>
                       </button>
                     </li>
