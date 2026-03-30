@@ -15,6 +15,9 @@ const simulatorModules = {
   'rate-limiting': lazy(() => import('../topics/07-security/RateLimitingSimulator.jsx')),
   'consensus': lazy(() => import('../topics/06-distributed/RaftSimulator.jsx')),
   'message-queue': lazy(() => import('../topics/05-message-queue/MessageQueueSimulator.jsx')),
+  'db-scaling': lazy(() => import('../topics/03-database/DBScalingSimulator.jsx')),
+  'distributed-coordination': lazy(() => import('../topics/06-distributed/DistributedCoordSimulator.jsx')),
+  'auth': lazy(() => import('../topics/07-security/AuthFlowSimulator.jsx')),
 }
 
 /**

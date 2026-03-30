@@ -1,0 +1,194 @@
+/* 分散式協調模擬器樣式 */
+
+.dist-coord-sim .dc-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-distributed);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* Redis 節點 */
+.dc-redis-nodes {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dc-redis-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-secondary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-width: 80px;
+}
+
+.dc-redis-node:hover {
+  border-color: var(--clr-text-muted);
+}
+
+.dc-redis-node.crashed {
+  opacity: 0.5;
+  border-color: var(--clr-error);
+}
+
+.dc-redis-node.locked {
+  border-color: var(--clr-warning);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.2);
+}
+
+.dc-redis-icon { font-size: var(--text-xl); }
+.dc-redis-label { font-size: var(--text-sm); font-weight: 500; color: var(--clr-text-primary); }
+.dc-redis-holder { font-size: var(--text-xs); color: var(--clr-warning); font-family: var(--font-mono); }
+.dc-redis-hint { font-size: 10px; color: var(--clr-text-muted); opacity: 0.6; }
+
+/* 狀態列 */
+.dc-status {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.dc-status .danger { color: var(--clr-error); }
+
+/* 控制區 */
+.dc-controls {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+/* === Snowflake ID === */
+.sf-structure {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--space-4);
+  padding: var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  align-items: center;
+  overflow-x: auto;
+}
+
+.sf-bit {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sf-bit.sign {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--clr-error);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.sf-bit-group {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.sf-bit-group.timestamp {
+  flex: 4;
+  background: rgba(96, 165, 250, 0.15);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.sf-bit-group.datacenter {
+  flex: 0.5;
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.sf-bit-group.machine {
+  flex: 0.5;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.sf-bit-group.seq {
+  flex: 1.2;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.sf-bit-label {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.sf-info {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* 生成的 ID 列表 */
+.sf-ids {
+  margin-bottom: var(--space-5);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.sf-id-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--clr-border);
+  gap: var(--space-3);
+}
+
+.sf-id-decimal {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--clr-text-primary);
+  flex-shrink: 0;
+}
+
+.sf-id-parts {
+  display: flex;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.sf-part {
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.sf-part.sign { color: var(--clr-error); }
+.sf-part.ts { color: var(--clr-info); }
+.sf-part.dc { color: var(--clr-success); }
+.sf-part.mc { color: var(--clr-warning); }
+.sf-part.sq { color: #a855f7; }
+
+@media (max-width: 768px) {
+  .dc-controls {
+    flex-direction: column;
+  }
+  .sf-id-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,192 @@
+/* DB Scaling 模擬器樣式 */
+
+.db-scaling-sim .db-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-database);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* Replication 視覺化 */
+.db-replication-vis {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding: var(--space-5);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.db-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-secondary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  min-width: 120px;
+}
+
+.db-node.primary {
+  border-color: var(--clr-warning);
+}
+
+.db-node.replica {
+  border-color: var(--clr-info);
+}
+
+.db-node-badge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+}
+
+.db-node-count {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  color: var(--clr-text-muted);
+}
+
+.db-node-items {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.db-record {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  background: rgba(96, 165, 250, 0.12);
+  color: var(--clr-info);
+}
+
+.db-replication-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+}
+
+.db-arrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.db-arrow.syncing {
+  color: var(--clr-warning);
+  animation: arrow-pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes arrow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.db-lag {
+  font-size: var(--text-xs);
+  color: var(--clr-warning);
+  font-family: var(--font-mono);
+}
+
+.db-replicas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Sharding 視覺化 */
+.db-shard-algos {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.db-shard-algos .btn-sm {
+  padding: var(--space-2) var(--space-3);
+}
+
+.db-shard-algos .btn-sm.active {
+  background: var(--clr-info);
+  color: white;
+  border-color: var(--clr-info);
+}
+
+.db-shards-vis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.db-shard {
+  padding: var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+}
+
+.db-shard-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.db-shard-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+}
+
+.db-shard-bar {
+  height: 6px;
+  background: var(--clr-bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.db-shard-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.db-shard-items {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+
+/* 控制區 */
+.db-controls {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .db-shards-vis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .db-replication-vis {
+    flex-direction: column;
+  }
+}
