@@ -3,6 +3,7 @@ import { useParams, useNavigate, useOutletContext } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useEffect, Suspense, lazy } from 'react'
 import { getTopicById, getAdjacentTopics } from '../data/topics'
+import topicContent from '../data/topicContent'
 import InterviewQA from '../components/InterviewQA'
 import './TopicPage.css'
 
@@ -46,6 +47,7 @@ export default function TopicPage() {
   const topic = getTopicById(topicId)
   const { prev, next } = getAdjacentTopics(topicId)
   const progress = getTopicProgress(topicId)
+  const content = topicContent[topicId] || null
 
   // 頁面可見時標記「已閱讀概念」
   // 只依賴 topicId 字串，避免 topic 物件和 markComplete 的參考變化導致重複執行
@@ -119,12 +121,23 @@ export default function TopicPage() {
         </div>
       </div>
 
-      {/* 第一段：概念講解（先放置預設文案，後續各主題會替換） */}
+      {/* 第一段：概念講解 */}
       <section className="content-section" id="concept-section">
         <h2>📖 {t('sections.concept')}</h2>
-        <div className="concept-placeholder">
-          <p>此主題的概念講解即將推出。我們正在為每個主題撰寫深入的講解內容。</p>
-        </div>
+        {content?.concepts ? (
+          <div className="concept-content">
+            {content.concepts.map((c, i) => (
+              <div key={i} className="concept-block">
+                <h3 className="concept-block-title">{c.title}</h3>
+                <p className="concept-block-text">{c.text}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="concept-placeholder">
+            <p>此主題的概念講解即將推出。</p>
+          </div>
+        )}
       </section>
 
       {/* 第二段：互動模擬器 */}
@@ -146,12 +159,8 @@ export default function TopicPage() {
       {/* 第三段：面試問答 */}
       <section className="content-section" id="interview-section">
         <h2>💬 {t('sections.interview')}</h2>
-        <InterviewQA items={[
-          {
-            question: '此主題的面試問答即將推出',
-            answer: '我們正在整理各主題的高頻面試問題和最佳回答要點。',
-            keywords: ['即將推出'],
-          },
+        <InterviewQA items={content?.interview || [
+          { question: '此主題的面試問答即將推出', answer: '我們正在整理各主題的高頻面試問題和最佳回答要點。', keywords: ['即將推出'] },
         ]} />
         <button
           className="btn btn-ghost mark-qa-btn"
