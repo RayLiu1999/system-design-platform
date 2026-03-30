@@ -1,0 +1,118 @@
+/* 主題卡片樣式 */
+.topic-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-3);
+  background: var(--clr-bg-secondary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+  overflow: hidden;
+  min-height: 90px;
+}
+
+.topic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.topic-card:hover {
+  border-color: var(--card-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.topic-card:hover::before {
+  opacity: 1;
+}
+
+/* 完成狀態 */
+.topic-card-completed {
+  border-color: var(--clr-success);
+}
+
+.topic-card-completed::before {
+  background: var(--clr-success);
+  opacity: 1;
+}
+
+/* 進行中狀態 */
+.topic-card-progress {
+  border-color: var(--clr-warning);
+}
+
+.topic-card-progress::before {
+  background: var(--clr-warning);
+  opacity: 1;
+}
+
+/* 徽章 */
+.topic-card-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--clr-success);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-badge {
+  width: auto;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--clr-warning);
+  font-size: 9px;
+}
+
+/* 標題 */
+.topic-card-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  line-height: 1.3;
+}
+
+.topic-card-subtitle {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  line-height: 1.3;
+}
+
+/* 底部進度條 */
+.topic-card-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--clr-bg-tertiary);
+}
+
+.topic-card-bar-fill {
+  height: 100%;
+  background: var(--clr-success);
+  transition: width var(--transition-base);
+}
+
+.topic-card-progress .topic-card-bar-fill {
+  background: var(--clr-warning);
+}

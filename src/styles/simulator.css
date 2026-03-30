@@ -1,0 +1,253 @@
+/* 模擬器共用樣式 */
+
+/* ===== 模擬器容器 ===== */
+.simulator-container {
+  background: var(--clr-bg-secondary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+}
+
+.simulator-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.simulator-title .icon {
+  font-size: var(--text-xl);
+}
+
+/* ===== 控制列 ===== */
+.sim-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.sim-controls label {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sim-controls input[type="range"] {
+  width: 120px;
+  accent-color: var(--clr-info);
+}
+
+.sim-controls select {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-bg-secondary);
+  color: var(--clr-text-primary);
+  font-size: var(--text-sm);
+}
+
+/* ===== 視覺化區域 ===== */
+.sim-canvas-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  background: var(--clr-bg-primary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.sim-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== 節點元件 ===== */
+.sim-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-secondary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  min-width: 80px;
+  text-align: center;
+}
+
+.sim-node.active {
+  border-color: var(--clr-info);
+  background: rgba(96, 165, 250, 0.08);
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.2);
+}
+
+.sim-node.error {
+  border-color: var(--clr-error);
+  background: rgba(239, 68, 68, 0.08);
+  opacity: 0.6;
+}
+
+.sim-node .node-label {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+}
+
+.sim-node .node-value {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+}
+
+.sim-node .node-sub {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+}
+
+/* ===== 節點群組佈局 ===== */
+.sim-node-group {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== 進度條 ===== */
+.sim-bar {
+  height: 6px;
+  background: var(--clr-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.sim-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--clr-info);
+  transition: width var(--transition-base);
+}
+
+/* ===== 統計面板 ===== */
+.sim-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.sim-stat-card {
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+}
+
+.sim-stat-value {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+}
+
+.sim-stat-label {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* ===== 日誌面板 ===== */
+.sim-log {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  max-height: 120px;
+  overflow-y: auto;
+  padding: var(--space-3);
+  background: var(--clr-bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+}
+
+.sim-log-line {
+  padding: 2px 0;
+}
+
+.sim-log-line .highlight {
+  color: var(--clr-info);
+}
+
+.sim-log-line .success {
+  color: var(--clr-success);
+}
+
+.sim-log-line .error {
+  color: var(--clr-error);
+}
+
+/* ===== 提示文字 ===== */
+.sim-hint {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--clr-info);
+  margin-top: var(--space-4);
+  line-height: 1.6;
+}
+
+/* ===== 連線動畫（用於節點之間的資料流）===== */
+@keyframes data-flow {
+  0% { stroke-dashoffset: 20; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.data-flow-line {
+  stroke-dasharray: 5 5;
+  animation: data-flow 0.8s linear infinite;
+}
+
+/* ===== 脈動效果 ===== */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.sim-node.pulsing {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== 響應式調整 ===== */
+@media (max-width: 768px) {
+  .simulator-container {
+    padding: var(--space-4);
+  }
+
+  .sim-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sim-node-group {
+    gap: var(--space-2);
+  }
+
+  .sim-node {
+    min-width: 60px;
+    padding: var(--space-2) var(--space-3);
+  }
+}

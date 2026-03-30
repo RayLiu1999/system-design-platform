@@ -1,0 +1,27 @@
+/* 佈局樣式 */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  margin-top: var(--navbar-height);
+  margin-left: var(--sidebar-width);
+  min-height: calc(100vh - var(--navbar-height));
+  padding: var(--space-8) var(--space-6);
+  transition: margin-left var(--transition-base);
+}
+
+.main-content-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* 響應式 — 手機版無側邊欄偏移 */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: var(--space-5) var(--space-4);
+  }
+}

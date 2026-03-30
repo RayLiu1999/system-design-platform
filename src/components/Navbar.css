@@ -1,0 +1,99 @@
+/* 導覽列樣式 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background: var(--clr-bg-secondary);
+  border-bottom: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-5);
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Logo 區域 */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.navbar-brand:hover {
+  background: var(--clr-bg-hover);
+}
+
+.navbar-logo {
+  font-size: var(--text-lg);
+}
+
+.navbar-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+}
+
+/* 漢堡選單 */
+.navbar-hamburger {
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-secondary);
+  transition: background var(--transition-fast);
+}
+
+.navbar-hamburger:hover {
+  background: var(--clr-bg-hover);
+}
+
+/* 學習進度 */
+.navbar-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.progress-ring {
+  position: relative;
+}
+
+.progress-ring-fill {
+  transition: stroke-dashoffset var(--transition-slow);
+}
+
+.progress-text {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--clr-text-secondary);
+}
+
+/* 主題切換按鈕 */
+.navbar-theme-toggle {
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.navbar-theme-toggle:hover {
+  background: var(--clr-bg-hover);
+  color: var(--clr-text-primary);
+}

@@ -1,0 +1,114 @@
+/* 首頁樣式 */
+.home-page {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* 標題區域 */
+.home-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.home-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.02em;
+}
+
+.home-subtitle {
+  font-size: var(--text-base);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+/* 總進度條 */
+.home-progress-summary {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.home-progress-bar {
+  height: 6px;
+  background: var(--clr-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.home-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-info), var(--clr-success));
+  border-radius: 3px;
+  transition: width var(--transition-slow);
+}
+
+.home-progress-text {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+}
+
+/* 學習地圖 */
+.home-map {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 分類區塊 */
+.home-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.home-cat-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.home-cat-line {
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* 主題卡片網格 — 3 欄 */
+.home-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+/* 底部提示 */
+.home-footer-hint {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  margin-top: var(--space-10);
+  opacity: 0.6;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: var(--text-2xl);
+  }
+
+  .home-topic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-topic-grid {
+    grid-template-columns: 1fr;
+  }
+}

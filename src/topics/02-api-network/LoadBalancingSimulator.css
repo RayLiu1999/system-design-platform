@@ -1,0 +1,53 @@
+/* Load Balancing Simulator 專屬樣式 */
+
+.lb-algo-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-info);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+.lb-box {
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.lb-servers {
+  margin-bottom: var(--space-5);
+}
+
+.lb-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.lb-total {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .lb-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lb-total {
+    margin-left: 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,127 @@
+/* 主題頁面樣式 */
+.topic-page {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* 頂部導航 */
+.topic-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.topic-nav-arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* 標題區域 */
+.topic-header {
+  margin-bottom: var(--space-10);
+}
+
+.topic-color-bar {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: var(--space-4);
+}
+
+.topic-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.topic-subtitle {
+  font-size: var(--text-md);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* 進度檢查點 */
+.topic-checkpoints {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.checkpoint {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.checkpoint.done {
+  color: var(--clr-success);
+}
+
+/* 佔位區塊 */
+.simulator-placeholder,
+.concept-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-6);
+  background: var(--clr-bg-secondary);
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.placeholder-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.simulator-placeholder p,
+.concept-placeholder p {
+  font-size: var(--text-base);
+  color: var(--clr-text-secondary);
+}
+
+.placeholder-hint {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+}
+
+.simulator-loading {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--clr-text-muted);
+}
+
+/* 主題不存在 */
+.topic-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 50vh;
+}
+
+/* 標記按鈕 */
+.mark-qa-btn {
+  margin-top: var(--space-4);
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+  .topic-title {
+    font-size: var(--text-2xl);
+  }
+
+  .topic-checkpoints {
+    gap: var(--space-3);
+  }
+}
