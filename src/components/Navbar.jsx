@@ -28,7 +28,7 @@ export default function Navbar({ theme, onToggleTheme, onToggleSidebar }) {
         {/* Logo / 標題 */}
         <button className="navbar-brand" onClick={() => navigate('/')} id="nav-home">
           <span className="navbar-logo">⚙</span>
-          <span className="navbar-title hide-mobile">{t('app.title')}</span>
+          <span className="navbar-title">{t('app.logoTitle')}</span>
         </button>
       </div>
 

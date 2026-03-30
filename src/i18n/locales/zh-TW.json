@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "資深後端系統設計學習平台",
+    "logoTitle": "System Design Platform",
+    "title": "System Design",
     "subtitle": "互動式模擬器 × 面試問答 × 系統設計全攻略",
     "progress": "學習進度",
     "backToMap": "返回地圖",
