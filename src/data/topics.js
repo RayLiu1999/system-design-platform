@@ -83,7 +83,7 @@ export const CATEGORIES = [
     topics: [
       { id: 'observability', titleKey: 'topics.observability.title', subtitleKey: 'topics.observability.subtitle', hasSimulator: true },
       { id: 'capacity-planning', titleKey: 'topics.capacity-planning.title', subtitleKey: 'topics.capacity-planning.subtitle', hasSimulator: true },
-      { id: 'devops', titleKey: 'topics.devops.title', subtitleKey: 'topics.devops.subtitle', hasSimulator: false },
+      { id: 'devops', titleKey: 'topics.devops.title', subtitleKey: 'topics.devops.subtitle', hasSimulator: true },
     ],
   },
 ]

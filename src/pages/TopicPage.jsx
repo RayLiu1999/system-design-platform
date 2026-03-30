@@ -32,6 +32,7 @@ const simulatorModules = {
   'capacity-planning': lazy(() => import('../topics/08-observability/CapacityPlanningSimulator.jsx')),
   'high-availability': lazy(() => import('../topics/01-fundamentals/HighAvailabilitySimulator.jsx')),
   'microservices': lazy(() => import('../topics/06-distributed/MicroservicesSimulator.jsx')),
+  'devops': lazy(() => import('../topics/08-observability/DevOpsSimulator.jsx')),
 }
 
 /**
