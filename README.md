@@ -69,6 +69,13 @@ src/
    npm run dev
    ```
 
+### Docker
+1. Build and run with Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+2. Access the platform at `http://localhost:8080`.
+
 ---
 
 ## License

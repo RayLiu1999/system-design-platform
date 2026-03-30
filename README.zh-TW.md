@@ -69,6 +69,13 @@ src/
    npm run dev
    ```
 
+### Docker 執行
+1. 使用 Docker Compose 構建並啟動：
+   ```bash
+   docker-compose up --build
+   ```
+2. 在瀏覽器打開 `http://localhost:8080` 即可訪問。
+
 ---
 
 ## 授權條款
