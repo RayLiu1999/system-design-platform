@@ -13,7 +13,7 @@ export const CATEGORIES = [
     topics: [
       { id: 'cap-theorem', titleKey: 'topics.cap-theorem.title', subtitleKey: 'topics.cap-theorem.subtitle', hasSimulator: true },
       { id: 'scalability', titleKey: 'topics.scalability.title', subtitleKey: 'topics.scalability.subtitle', hasSimulator: true },
-      { id: 'high-availability', titleKey: 'topics.high-availability.title', subtitleKey: 'topics.high-availability.subtitle', hasSimulator: false },
+      { id: 'high-availability', titleKey: 'topics.high-availability.title', subtitleKey: 'topics.high-availability.subtitle', hasSimulator: true },
     ],
   },
   {
@@ -63,7 +63,7 @@ export const CATEGORIES = [
     topics: [
       { id: 'consensus', titleKey: 'topics.consensus.title', subtitleKey: 'topics.consensus.subtitle', hasSimulator: true },
       { id: 'distributed-coordination', titleKey: 'topics.distributed-coordination.title', subtitleKey: 'topics.distributed-coordination.subtitle', hasSimulator: true },
-      { id: 'microservices', titleKey: 'topics.microservices.title', subtitleKey: 'topics.microservices.subtitle', hasSimulator: false },
+      { id: 'microservices', titleKey: 'topics.microservices.title', subtitleKey: 'topics.microservices.subtitle', hasSimulator: true },
     ],
   },
   {

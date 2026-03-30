@@ -1,0 +1,184 @@
+/* 微服務架構模擬器樣式 */
+.ms-sim .ms-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-distributed);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* Circuit Breaker 狀態機 */
+.cb-state-machine {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.cb-state {
+  padding: var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all var(--transition-fast);
+  opacity: 0.5;
+}
+
+.cb-state.active {
+  border-color: var(--state-color);
+  opacity: 1;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--state-color) 20%, transparent);
+}
+
+.cb-state-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--state-color);
+  margin-bottom: var(--space-1);
+}
+
+.cb-state-desc {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  line-height: 1.4;
+}
+
+/* 當前狀態 */
+.cb-current {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border: 2px solid;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+}
+
+.cb-current-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: cb-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes cb-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* 健康度滑桿 */
+.cb-health-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.cb-health-slider label {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  flex-shrink: 0;
+}
+
+.cb-health-slider input[type="range"] {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  background: var(--clr-border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.cb-health-slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--clr-info);
+  cursor: pointer;
+}
+
+.cb-health-val {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  min-width: 45px;
+  text-align: right;
+}
+
+.cb-health-val.safe { color: var(--clr-success); }
+.cb-health-val.warning { color: var(--clr-warning); }
+.cb-health-val.danger { color: var(--clr-error); }
+
+/* Service Discovery */
+.sd-registry {
+  margin-bottom: var(--space-4);
+}
+
+.sd-registry-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.sd-instances {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sd-instance {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  transition: all var(--transition-fast);
+}
+
+.sd-instance.unhealthy { opacity: 0.5; }
+
+.sd-inst-name {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--clr-text-primary);
+}
+
+.sd-inst-svc { color: var(--clr-info); }
+.sd-inst-host { color: var(--clr-text-muted); font-family: var(--font-mono); }
+
+.sd-inst-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.sd-dot.healthy { background: var(--clr-success); }
+.sd-dot.unhealthy { background: var(--clr-error); }
+
+@media (max-width: 768px) {
+  .cb-state-machine { grid-template-columns: 1fr; }
+  .sd-instance { grid-template-columns: 1fr 1fr; }
+}

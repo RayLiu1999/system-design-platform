@@ -29,6 +29,8 @@ const simulatorModules = {
   'nosql-db': lazy(() => import('../topics/03-database/NoSQLSimulator.jsx')),
   'redis': lazy(() => import('../topics/04-cache/RedisSimulator.jsx')),
   'capacity-planning': lazy(() => import('../topics/08-observability/CapacityPlanningSimulator.jsx')),
+  'high-availability': lazy(() => import('../topics/01-fundamentals/HighAvailabilitySimulator.jsx')),
+  'microservices': lazy(() => import('../topics/06-distributed/MicroservicesSimulator.jsx')),
 }
 
 /**
