@@ -1,0 +1,180 @@
+/* Rate Limiting 模擬器樣式 */
+
+.rate-limit-sim .rl-algo-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-security);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 狀態視覺化面板 */
+.rl-state-panel {
+  margin-bottom: var(--space-5);
+  padding: var(--space-5);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-lg);
+}
+
+/* Window 視覺化 */
+.rl-window-label,
+.rl-bucket-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.rl-window-bar {
+  position: relative;
+  height: 40px;
+  background: var(--clr-bg-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+}
+
+.rl-window-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(96, 165, 250, 0.08);
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+.rl-window-slots {
+  position: relative;
+  display: flex;
+  height: 100%;
+  gap: 2px;
+  padding: 4px;
+  z-index: 1;
+}
+
+.rl-slot {
+  flex: 1;
+  border-radius: var(--radius-sm);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  transition: all var(--transition-fast);
+}
+
+.rl-slot.used {
+  background: var(--clr-info);
+  border-color: var(--clr-info);
+  box-shadow: 0 0 6px rgba(96, 165, 250, 0.3);
+}
+
+.rl-sliding-note,
+.rl-bucket-note {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  margin-top: var(--space-2);
+}
+
+/* Token Bucket 視覺化 */
+.rl-bucket {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--clr-bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+  justify-content: center;
+}
+
+.rl-token {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  transition: all var(--transition-fast);
+}
+
+.rl-token.filled {
+  color: var(--clr-warning);
+  background: rgba(251, 191, 36, 0.15);
+  border-color: var(--clr-warning);
+}
+
+/* Leaky Bucket 視覺化 */
+.rl-leaky-bucket {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  margin: 0 auto;
+  background: var(--clr-bg-primary);
+  border: 2px solid var(--clr-border);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-top: none;
+  overflow: hidden;
+}
+
+.rl-leaky-water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(96, 165, 250, 0.6), rgba(96, 165, 250, 0.2));
+  transition: height var(--transition-base);
+  border-radius: 0 0 6px 6px;
+}
+
+.rl-leaky-drip {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  animation: drip 1s ease-in-out infinite;
+}
+
+@keyframes drip {
+  0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.3; transform: translateX(-50%) translateY(6px); }
+}
+
+/* 控制區 */
+.rl-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.rl-total {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  margin-left: auto;
+}
+
+.rl-limit-value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  min-width: 60px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .rl-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .rl-total {
+    margin-left: 0;
+    text-align: center;
+  }
+}

@@ -9,6 +9,9 @@ import './TopicPage.css'
 // 動態載入主題模擬器（按需載入以提升效能）
 const simulatorModules = {
   'load-balancing': lazy(() => import('../topics/02-api-network/LoadBalancingSimulator.jsx')),
+  'cap-theorem': lazy(() => import('../topics/01-fundamentals/CAPSimulator.jsx')),
+  'cache-problems': lazy(() => import('../topics/04-cache/CacheProblemsSimulator.jsx')),
+  'rate-limiting': lazy(() => import('../topics/07-security/RateLimitingSimulator.jsx')),
 }
 
 /**
