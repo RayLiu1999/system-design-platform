@@ -64,17 +64,22 @@ src/
    # 或
    pnpm install
    ```
-3. 啟動開發伺服器：
+3. 建立環境變數檔案：
+   ```bash
+   cp .env.example .env
+   ```
+4. 啟動開發伺服器：
    ```bash
    npm run dev
    ```
 
 ### Docker 執行
-1. 使用 Docker Compose 構建並啟動：
+1. 在 `.env` 檔案中配置 `HOST_IP` 與 `PORT`（預設為 `127.0.0.1:8080`）。
+2. 使用 Docker Compose 構建並啟動：
    ```bash
    docker-compose up --build
    ```
-2. 在瀏覽器打開 `http://localhost:8080` 即可訪問。
+3. 在瀏覽器打開 `http://<HOST_IP>:<PORT>`（例如 `http://localhost:8080`）即可訪問。
 
 ---
 

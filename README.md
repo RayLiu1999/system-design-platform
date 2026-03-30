@@ -64,17 +64,22 @@ src/
    # or
    pnpm install
    ```
-3. Start the development server:
+3. Create your environment file:
+   ```bash
+   cp .env.example .env
+   ```
+4. Start the development server:
    ```bash
    npm run dev
    ```
 
 ### Docker
-1. Build and run with Docker Compose:
+1. Configure `HOST_IP` and `PORT` in your `.env` file (default: `127.0.0.1:8080`).
+2. Build and run with Docker Compose:
    ```bash
    docker-compose up --build
    ```
-2. Access the platform at `http://localhost:8080`.
+3. Access the platform at `http://<HOST_IP>:<PORT>` (e.g., `http://localhost:8080`).
 
 ---
 
