@@ -21,6 +21,10 @@ const simulatorModules = {
   'observability': lazy(() => import('../topics/08-observability/ObservabilitySimulator.jsx')),
   'cache-strategy': lazy(() => import('../topics/04-cache/CacheStrategySimulator.jsx')),
   'event-driven': lazy(() => import('../topics/05-message-queue/EventDrivenSimulator.jsx')),
+  'api-design': lazy(() => import('../topics/02-api-network/APIDesignSimulator.jsx')),
+  'cdn-proxy': lazy(() => import('../topics/02-api-network/CDNSimulator.jsx')),
+  'security-vulnerabilities': lazy(() => import('../topics/07-security/SecuritySimulator.jsx')),
+  'async-processing': lazy(() => import('../topics/05-message-queue/AsyncProcessingSimulator.jsx')),
 }
 
 /**

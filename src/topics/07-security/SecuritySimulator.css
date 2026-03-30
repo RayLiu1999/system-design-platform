@@ -1,0 +1,161 @@
+/* 安全漏洞模擬器樣式 */
+
+.sec-sim .sec-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-security);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 漏洞選擇列表 */
+.sec-vuln-list {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.sec-vuln-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--clr-text-secondary);
+}
+
+.sec-vuln-btn:hover { border-color: var(--clr-text-muted); }
+.sec-vuln-btn.active { border-color: var(--clr-error); background: rgba(239, 68, 68, 0.08); }
+
+.sec-vuln-rank {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--clr-error);
+  opacity: 0.7;
+}
+
+.sec-vuln-name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* 漏洞詳情 */
+.sec-detail {
+  margin-bottom: var(--space-5);
+}
+
+.sec-detail-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.sec-detail-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+/* 正常 vs 攻擊對比 */
+.sec-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.sec-scenario {
+  padding: var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sec-scenario:hover { border-color: var(--clr-text-muted); }
+
+.sec-scenario.safe.active { border-color: var(--clr-success); }
+.sec-scenario.danger.active { border-color: var(--clr-error); box-shadow: 0 0 12px rgba(239, 68, 68, 0.15); }
+
+.sec-scenario-header {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.sec-scenario-input {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--clr-text-secondary);
+  padding: var(--space-2);
+  background: var(--clr-bg-primary);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+  word-break: break-all;
+}
+
+.sec-scenario-query {
+  display: block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--clr-info);
+  padding: var(--space-2);
+  background: var(--clr-bg-primary);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.sec-scenario-result {
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.sec-scenario.safe .sec-scenario-result { color: var(--clr-success); }
+.sec-scenario.danger .sec-scenario-result { color: var(--clr-error); }
+
+/* 修復方式 */
+.sec-fix {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.sec-fix-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-success);
+  margin-bottom: var(--space-2);
+}
+
+.sec-fix-code {
+  display: block;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--clr-text-primary);
+  background: var(--clr-bg-primary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+}
+
+@media (max-width: 768px) {
+  .sec-comparison {
+    grid-template-columns: 1fr;
+  }
+  .sec-vuln-list {
+    flex-direction: column;
+  }
+}
