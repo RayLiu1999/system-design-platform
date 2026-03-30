@@ -1,0 +1,145 @@
+/* 快取策略模擬器樣式 */
+
+.cs-sim .cs-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-cache);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* Cache + DB 狀態 */
+.cs-state-vis {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cs-store {
+  min-width: 180px;
+  flex: 1;
+  max-width: 280px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--clr-border);
+}
+
+.cs-store.cache-store {
+  border-color: var(--clr-warning);
+}
+
+.cs-store.db-store {
+  border-color: var(--clr-info);
+}
+
+.cs-store-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.cs-empty {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  padding: var(--space-2);
+}
+
+.cs-entry {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cs-key {
+  color: var(--clr-info);
+}
+
+.cs-val {
+  color: var(--clr-text-primary);
+}
+
+.cs-arrow-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding-top: var(--space-8);
+}
+
+.cs-arrow-label {
+  font-size: 10px;
+  color: var(--clr-text-muted);
+}
+
+.cs-arrow {
+  font-size: var(--text-xl);
+  color: var(--clr-text-muted);
+}
+
+/* Write-Behind 待寫入 */
+.cs-pending {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--clr-warning);
+  flex-wrap: wrap;
+}
+
+.cs-pending-item {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 1px 5px;
+  background: rgba(251, 191, 36, 0.15);
+  border-radius: var(--radius-sm);
+}
+
+/* 操作面板 */
+.cs-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.cs-action-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.cs-action-label {
+  font-size: var(--text-sm);
+  color: var(--clr-text-muted);
+  min-width: 50px;
+}
+
+@media (max-width: 768px) {
+  .cs-state-vis {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cs-arrow-block {
+    padding-top: 0;
+    transform: rotate(90deg);
+  }
+}

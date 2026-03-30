@@ -18,6 +18,9 @@ const simulatorModules = {
   'db-scaling': lazy(() => import('../topics/03-database/DBScalingSimulator.jsx')),
   'distributed-coordination': lazy(() => import('../topics/06-distributed/DistributedCoordSimulator.jsx')),
   'auth': lazy(() => import('../topics/07-security/AuthFlowSimulator.jsx')),
+  'observability': lazy(() => import('../topics/08-observability/ObservabilitySimulator.jsx')),
+  'cache-strategy': lazy(() => import('../topics/04-cache/CacheStrategySimulator.jsx')),
+  'event-driven': lazy(() => import('../topics/05-message-queue/EventDrivenSimulator.jsx')),
 }
 
 /**
