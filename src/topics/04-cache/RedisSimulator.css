@@ -1,0 +1,106 @@
+/* Redis 模擬器樣式 */
+.redis-sim .redis-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid #dc382c;
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 快捷指令 */
+.redis-quick-cmds {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.redis-cmd-btn {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.redis-cmd-btn:hover {
+  border-color: #dc382c;
+  color: #dc382c;
+}
+
+/* 輸入區 */
+.redis-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.redis-prompt {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: #dc382c;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.redis-input {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  background: var(--clr-bg-primary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.redis-input:focus {
+  border-color: #dc382c;
+}
+
+.btn-sm {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+/* 輸出區 */
+.redis-output {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: var(--space-3) var(--space-4);
+  background: #0c0c0c;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: var(--space-4);
+}
+
+.redis-output-line {
+  padding: 1px 0;
+}
+
+.redis-output-line.info { color: var(--clr-text-secondary); }
+.redis-output-line.success { color: var(--clr-success); }
+.redis-output-line.warning { color: var(--clr-warning); }
+.redis-output-line.error { color: var(--clr-error); }
+
+@media (max-width: 768px) {
+  .redis-input-row {
+    flex-wrap: wrap;
+  }
+  .redis-quick-cmds {
+    flex-direction: column;
+  }
+}

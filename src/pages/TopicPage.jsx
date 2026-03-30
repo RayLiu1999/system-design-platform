@@ -25,6 +25,10 @@ const simulatorModules = {
   'cdn-proxy': lazy(() => import('../topics/02-api-network/CDNSimulator.jsx')),
   'security-vulnerabilities': lazy(() => import('../topics/07-security/SecuritySimulator.jsx')),
   'async-processing': lazy(() => import('../topics/05-message-queue/AsyncProcessingSimulator.jsx')),
+  'relational-db': lazy(() => import('../topics/03-database/RelationalDBSimulator.jsx')),
+  'nosql-db': lazy(() => import('../topics/03-database/NoSQLSimulator.jsx')),
+  'redis': lazy(() => import('../topics/04-cache/RedisSimulator.jsx')),
+  'capacity-planning': lazy(() => import('../topics/08-observability/CapacityPlanningSimulator.jsx')),
 }
 
 /**

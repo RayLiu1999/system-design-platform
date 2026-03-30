@@ -1,0 +1,140 @@
+/* 關聯式資料庫模擬器樣式 */
+.rdb-sim .rdb-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-database);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 查詢模式切換 */
+.rdb-mode-switch {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.rdb-mode {
+  padding: var(--space-2) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.rdb-mode:hover { border-color: var(--clr-text-muted); }
+.rdb-mode.active.warning { border-color: var(--clr-warning); color: var(--clr-warning); }
+.rdb-mode.active.success { border-color: var(--clr-success); color: var(--clr-success); }
+
+/* 表格 */
+.rdb-table-container {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+}
+
+.rdb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+}
+
+.rdb-table th {
+  padding: var(--space-2) var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border-bottom: 1px solid var(--clr-border);
+  text-align: left;
+  color: var(--clr-text-muted);
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+}
+
+.rdb-table td {
+  padding: var(--space-1) var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--clr-text-secondary);
+}
+
+.rdb-table tr.scanned {
+  background: rgba(251, 191, 36, 0.06);
+}
+
+.rdb-table tr.result {
+  background: rgba(74, 222, 128, 0.1);
+  color: var(--clr-success);
+}
+
+.rdb-table tr.result td { color: var(--clr-success); font-weight: 500; }
+
+.rdb-query-btns {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+/* 隔離等級卡片 */
+.rdb-isolation-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.rdb-iso-card {
+  padding: var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.rdb-iso-card:hover { border-color: var(--clr-text-muted); }
+.rdb-iso-card.active { border-color: var(--clr-info); }
+
+.rdb-iso-level {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--clr-info);
+  margin-bottom: var(--space-2);
+}
+
+.rdb-iso-desc {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+}
+
+.rdb-iso-problems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: var(--space-2);
+}
+
+.rdb-iso-tag {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+}
+
+.rdb-iso-tag.safe { background: rgba(74, 222, 128, 0.12); color: var(--clr-success); }
+.rdb-iso-tag.danger { background: rgba(239, 68, 68, 0.12); color: var(--clr-error); }
+
+.rdb-iso-perf {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+}

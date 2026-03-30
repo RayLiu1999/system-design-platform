@@ -1,0 +1,79 @@
+/* NoSQL 模擬器樣式 */
+.nosql-sim .nosql-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-database);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+.nosql-example {
+  margin-bottom: var(--space-5);
+}
+
+.nosql-example-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.nosql-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  color: var(--clr-text-secondary);
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+
+.nosql-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.nosql-list-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--clr-text-primary);
+}
+
+.nosql-item {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 2px;
+}
+
+.nosql-item.pros { color: var(--clr-success); background: rgba(74, 222, 128, 0.06); }
+.nosql-item.cons { color: var(--clr-warning); background: rgba(251, 191, 36, 0.06); }
+
+.nosql-usecase {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.nosql-actions {
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .nosql-comparison {
+    grid-template-columns: 1fr;
+  }
+}

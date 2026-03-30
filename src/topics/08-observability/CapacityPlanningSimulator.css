@@ -1,0 +1,107 @@
+/* 容量規劃模擬器樣式 */
+.cap-plan-sim .cap-desc {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-left: 3px solid var(--clr-info);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+/* 輸入參數 */
+.cap-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.cap-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+}
+
+.cap-input-group label {
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.cap-input-group input[type="range"] {
+  flex: 1;
+  height: 4px;
+  background: var(--clr-border);
+  border-radius: 2px;
+  appearance: none;
+  outline: none;
+}
+
+.cap-input-group input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--clr-info);
+  cursor: pointer;
+}
+
+.cap-input-val {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--clr-text-primary);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* 擴展計算結果 */
+.cap-scale-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.cap-scale-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+}
+
+.cap-step-num {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--clr-info);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cap-scale-step strong {
+  color: var(--clr-text-primary);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 768px) {
+  .cap-inputs {
+    grid-template-columns: 1fr;
+  }
+}
