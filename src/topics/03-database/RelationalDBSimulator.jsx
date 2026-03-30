@@ -43,7 +43,7 @@ export default function RelationalDBSimulator({ onInteract }) {
   const [tab, setTab] = useState('index')
 
   // Index 狀態
-  const [tableData] = useState(
+  const [tableData] = useState(() =>
     Array.from({ length: 20 }, (_, i) => ({
       id: i + 1,
       name: ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack'][i % 10],
