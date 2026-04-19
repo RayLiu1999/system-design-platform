@@ -1,11 +1,12 @@
 // 主題頁面骨架 — 四段式佈局（概念講解 + 模擬器 + 實戰場景 + 面試問答）
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { getTopicById, getAdjacentTopics } from '../data/topics'
 import topicContent from '../data/topicContent'
 import InterviewQA from '../components/InterviewQA'
 import FormattedContent from '../components/FormattedContent'
+import TabGroup from '../components/TabGroup'
 import './TopicPage.css'
 
 // 動態載入主題模擬器（按需載入以提升效能）
@@ -44,6 +45,7 @@ export default function TopicPage() {
   const { topicId } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState('concept')
 
   const topic = getTopicById(topicId)
   const { prev, next } = getAdjacentTopics(topicId)
@@ -63,6 +65,13 @@ export default function TopicPage() {
 
   // 取得模擬器元件
   const SimulatorComponent = simulatorModules[topicId] || null
+
+  const tabs = [
+    { id: 'concept', label: `📖 ${t('sections.concept')}` },
+    { id: 'simulator', label: `🧪 ${t('sections.simulator')}` },
+    { id: 'scenarios', label: '🎯 實戰場景' },
+    { id: 'interview', label: `💬 ${t('sections.interview')}` }
+  ]
 
   return (
     <div className="topic-page page-enter-active" id={`topic-${topicId}`}>
@@ -100,64 +109,83 @@ export default function TopicPage() {
         <p className="topic-subtitle">{t(topic.subtitleKey)}</p>
       </div>
 
-      {/* 第一段：概念講解 */}
-      <section className="content-section" id="concept-section">
-        <h2>📖 {t('sections.concept')}</h2>
-        {content?.concepts ? (
-          <div className="concept-content">
-            {content.concepts.map((c, i) => (
-              <div key={i} className="concept-block">
-                <h3 className="concept-block-title">{c.title}</h3>
-                <FormattedContent text={c.text} />
+      {/* 區塊切換頁籤 */}
+      <div className="topic-tabs">
+        <TabGroup 
+          tabs={tabs} 
+          defaultTab={activeTab} 
+          onChange={setActiveTab} 
+        />
+      </div>
+
+      <div className="topic-content-wrapper">
+        {/* 第一段：概念講解 */}
+        {activeTab === 'concept' && (
+          <section className="content-section" id="concept-section">
+            {content?.concepts ? (
+              <div className="concept-content">
+                {content.concepts.map((c, i) => (
+                  <div key={i} className="concept-block">
+                    <h3 className="concept-block-title">{c.title}</h3>
+                    <FormattedContent text={c.text} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="concept-placeholder">
-            <p>此主題的概念講解即將推出。</p>
-          </div>
-        )}
-      </section>
-
-      {/* 第二段：互動模擬器 */}
-      <section className="content-section" id="simulator-section">
-        <h2>🧪 {t('sections.simulator')}</h2>
-        {SimulatorComponent ? (
-          <Suspense fallback={<div className="simulator-loading">載入模擬器中...</div>}>
-            <SimulatorComponent />
-          </Suspense>
-        ) : (
-          <div className="simulator-placeholder">
-            <div className="placeholder-icon">🔧</div>
-            <p>此主題的互動模擬器正在開發中</p>
-            <span className="placeholder-hint">開發完成後，你可以在此操作互動式模擬器來深入理解概念</span>
-          </div>
-        )}
-      </section>
-
-      {/* 第三段：實戰場景（含產品設計題） */}
-      {content?.scenarios && content.scenarios.length > 0 && (
-        <section className="content-section scenarios-section" id="scenarios-section">
-          <h2>🎯 實戰場景</h2>
-          <div className="scenarios-content">
-            {content.scenarios.map((s, i) => (
-              <div key={i} className="scenario-block">
-                <div className="scenario-label">{s.type === 'design' ? '🏗️ 產品設計' : '🔥 生產實戰'}</div>
-                <h3 className="scenario-block-title">{s.title}</h3>
-                <FormattedContent text={s.text} />
+            ) : (
+              <div className="concept-placeholder">
+                <p>此主題的概念講解即將推出。</p>
               </div>
-            ))}
-          </div>
-        </section>
-      )}
+            )}
+          </section>
+        )}
 
-      {/* 第四段：面試問答 */}
-      <section className="content-section" id="interview-section">
-        <h2>💬 {t('sections.interview')}</h2>
-        <InterviewQA items={content?.interview || [
-          { question: '此主題的面試問答即將推出', answer: '我們正在整理各主題的高頻面試問題和最佳回答要點。', keywords: ['即將推出'] },
-        ]} />
-      </section>
+        {/* 第二段：互動模擬器 */}
+        {activeTab === 'simulator' && (
+          <section className="content-section" id="simulator-section">
+            {SimulatorComponent ? (
+              <Suspense fallback={<div className="simulator-loading">載入模擬器中...</div>}>
+                <SimulatorComponent />
+              </Suspense>
+            ) : (
+              <div className="simulator-placeholder">
+                <div className="placeholder-icon">🔧</div>
+                <p>此主題的互動模擬器正在開發中</p>
+                <span className="placeholder-hint">開發完成後，你可以在此操作互動式模擬器來深入理解概念</span>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 第三段：實戰場景（含產品設計題） */}
+        {activeTab === 'scenarios' && (
+          <section className="content-section scenarios-section" id="scenarios-section">
+            {content?.scenarios && content.scenarios.length > 0 ? (
+              <div className="scenarios-content">
+                {content.scenarios.map((s, i) => (
+                  <div key={i} className="scenario-block">
+                    <div className="scenario-label">{s.type === 'design' ? '🏗️ 產品設計' : '🔥 生產實戰'}</div>
+                    <h3 className="scenario-block-title">{s.title}</h3>
+                    <FormattedContent text={s.text} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="concept-placeholder">
+                <p>此主題的實戰場景即將推出。</p>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 第四段：面試問答 */}
+        {activeTab === 'interview' && (
+          <section className="content-section" id="interview-section">
+            <InterviewQA items={content?.interview || [
+              { question: '此主題的面試問答即將推出', answer: '我們正在整理各主題的高頻面試問題和最佳回答要點。', keywords: ['即將推出'] },
+            ]} />
+          </section>
+        )}
+      </div>
     </div>
   )
 }

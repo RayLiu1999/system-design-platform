@@ -44,6 +44,50 @@
   margin-bottom: var(--space-4);
 }
 
+/* 頁籤容器 */
+.topic-tabs {
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--clr-border);
+  padding-bottom: 1px;
+}
+
+.topic-tabs .tab-group {
+  justify-content: flex-start;
+  gap: var(--space-4);
+}
+
+.topic-tabs .tab-btn {
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.topic-tabs .tab-btn:hover {
+  color: var(--clr-text-primary);
+  background: var(--clr-bg-hover);
+  transform: translateY(-1px);
+}
+
+.topic-tabs .tab-btn.active {
+  color: var(--clr-text-primary);
+  background: var(--clr-bg-tertiary);
+  border-bottom-color: var(--clr-text-primary);
+}
+
+/* 內容區域動畫 */
+.topic-content-wrapper {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* 佔位區塊 */
 .simulator-placeholder,
 .concept-placeholder {
